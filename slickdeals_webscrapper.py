@@ -67,7 +67,7 @@ for i in range(5):
         titles_top_five[new_titles_top_five[i]] = int(titles_top_five[new_titles_top_five[i]]) + 1
 
 new_titles_top_five.clear()      
-
+# last step
 for i in titles_top_five:
     if titles_top_five[i] > 0:
         new_top_five.append(i)
