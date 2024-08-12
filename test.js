@@ -1,20 +1,14 @@
-import puppeteer from 'puppeteer';
-import { google } from 'googleapis';
-import url from 'url'; // Import the URL module for parsing URLs
+import puppeteer from "puppeteer";
+import { google } from "googleapis";
+import url from "url"; // Import the URL module for parsing URLs
 
 const GET = async () => {
-  const scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
-  const auth = new google.auth.JWT(
-          "XXX",
-          null,
-          "XXX",
-          scopes
-    );
+  const scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+  const auth = new google.auth.JWT("XXX", null, "XXX", scopes);
 
-
-  const sheets = google.sheets({ version: 'v4', auth });
-  const spreadsheetId = '1C7fP0RZqZkj6EAAeeKz6bvr7F6r3z4o1Htc7eKPyOYE';
-  const range = 'active deals!H9:H25'; // Adjust range as needed
+  const sheets = google.sheets({ version: "v4", auth });
+  const spreadsheetId = "XXX";
+  const range = "XXX"; // Adjust range as needed
 
   try {
     // Fetch data from Google Sheets
@@ -24,7 +18,7 @@ const GET = async () => {
     });
 
     // Extract URLs from the sheet
-    const urls = response.data.values.map(item => item[0]);
+    const urls = response.data.values.map((item) => item[0]);
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -39,40 +33,42 @@ const GET = async () => {
       // Construct the URL dynamically if needed
       const targetUrl = `https://www.cashbackmonitor.com/cashback-store/${domain_actual[1]}/`;
 
-      await page.goto(targetUrl, { waitUntil: 'networkidle2' });
+      await page.goto(targetUrl, { waitUntil: "networkidle2" });
 
       // Extract data from the constructed URL
       const data = await page.evaluate(() => {
         const cashbackContainer = document.querySelector(".lo");
-        const cashbackName = cashbackContainer ? cashbackContainer.querySelector("a").textContent : 'No cashback name found';
-        const cashbackPercentage = document.querySelector("#ra0") ? document.querySelector("#ra0").textContent : 'No cashback percentage found';
+        const cashbackName = cashbackContainer
+          ? cashbackContainer.querySelector("a").textContent
+          : "No cashback name found";
+        const cashbackPercentage = document.querySelector("#ra0")
+          ? document.querySelector("#ra0").textContent
+          : "No cashback percentage found";
 
         return {
           cashbackName,
-          cashbackPercentage
+          cashbackPercentage,
         };
       });
 
-      results.push({ url: data});
+      results.push({ url: data });
     }
 
     await browser.close();
-    console.log(JSON.stringify(results))
+    console.log(JSON.stringify(results));
 
     return new Response(JSON.stringify(results || "No data found"), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
-
   } catch (error) {
-    console.error('Error:', error);
-    return new Response(JSON.stringify({ error: 'Something went wrong' }), {
+    console.error("Error:", error);
+    return new Response(JSON.stringify({ error: "Something went wrong" }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   }
 };
 
 // Invoke the GET function
 GET();
-
