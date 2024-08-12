@@ -20,8 +20,8 @@ compare = []
 res = []
 old_titles = []
 #Telegram key/setup
-TOKEN = "7267731697:AAHIVuAGIBvwGAmq_kzVUCIwlMyxGbaJSE8"
-chat_id = "7210926280"
+TOKEN = "XXX"
+chat_id = "XXX"
 p1 = driver.find_element(By.ID, "liveview_post_container")
 p2 = p1.find_elements(By.CLASS_NAME, "liveview_post_box")
 for i in p2:

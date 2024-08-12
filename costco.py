@@ -14,8 +14,8 @@ time.sleep(5)
 #Setting up arrays
 links_array = ["https://www.costco.com/2024-1-oz-American-Eagle-Gold-Coin.product.1804545.html", "https://www.costco.com/1-oz-Gold-Bar-PAMP-America-the-Free-Statue-of-Liberty-(New-in-Assay).product.1814004.html"]
 #Telegram key/setup
-TOKEN = "7267731697:AAHIVuAGIBvwGAmq_kzVUCIwlMyxGbaJSE8"
-chat_id = "7210926280"
+TOKEN = "XXX"
+chat_id = "XXX"
 not_found_counter = 0
 index_counter = 0
 while links_array:

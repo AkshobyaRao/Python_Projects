@@ -18,8 +18,8 @@ links = []
 old_titles = []
 compare = []
 #Telegram key/setup
-TOKEN = "7267731697:AAHIVuAGIBvwGAmq_kzVUCIwlMyxGbaJSE8"
-chat_id = "7210926280"
+TOKEN = "XXX"
+chat_id = "XXX"
 titles = driver.find_elements(By.CLASS_NAME, "title")
 for i in range(5):
     arr.append(translator.translate(titles[i].text))
